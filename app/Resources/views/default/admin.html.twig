@@ -1,0 +1,16 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+<h1>page pour Admin</h1>
+<p>{{ dump(app.user) }}</p>
+
+<p>{{ app.user.id }}</p>
+<p>{{ app.user.email }}</p>
+<ul>
+    {% for role in app.user.roles %}
+    <li>{{ role }}</li<
+    {% endfor %}
+</ul>
+
+{% endblock %}
