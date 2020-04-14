@@ -1,0 +1,40 @@
+{% extends 'back.html.twig' %}
+
+{% block content %}
+    <h1>Catégorie</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ category.libelle }}</h3>
+        </div>
+        <div class="card-body">
+            <h5>{{ category.slug }}</h5>
+            <p class="card-text">{{ category.description }}</p>
+            <small>
+                Crée le : {{ category.createAt | date('d/m/Y')}}
+            </small>
+
+        </div>
+    </div>
+
+ 
+            <a class="btn btn-secondary" href="{{ path('admin_category_index') }}">Retour</a>
+
+            <a class="btn btn-warning" href="{{ path('admin_category_edit', { 'id': category.id }) }}">Modifer</a>
+
+{% endblock %}
+
+
+{% block breadcrum %} 
+
+
+    <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+              <li class="breadcrumb-item"><a href="{{ path('admin_category_index') }}">Liste des catégories</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ category.libelle }}</li>
+
+         </ol>
+    </nav>
+
+{% endblock %}

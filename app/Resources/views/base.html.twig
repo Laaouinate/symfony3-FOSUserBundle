@@ -6,42 +6,105 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-        <link rel="stylesheet" href="{{ asset('back/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/bulma.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontawesome/CSS/font-awesome.min.css') }}">
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">AppSymfony</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://versions.bulma.io/0.5.1">
+      <img src="https://versions.bulma.io/0.5.1/images/bulma-logo.png" alt="Bulma v0.5.1: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Blog</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li  class="nav-item"><a class="nav-link" href="#">Connécte tant que : {{ app.user.username }}</a></li>
-        <li  class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout' | trans({}, 'FOSUserBundle') }}</a></li>
-        {% else %}
-        <li  class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_login') }}">{{ 'layout.login' | trans({}, 'FOSUserBundle') }}</a></li>
-        <li  class="nav-item"><a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register' | trans({}, 'FOSUserBundle') }}</a></li>
-        {% endif %}
-    </ul>
+    <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+      <span class="icon" style="color: #333;">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+
+    <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+      <span class="icon" style="color: #55acee;">
+        <i class="fa fa-twitter"></i>
+      </span>
+    </a>
+
+    <div class="navbar-burger burger" data-target="navMenuExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenuExample" class="navbar-menu">
+    <div class="navbar-start">
+
+      <a class="navbar-item " href="https://versions.bulma.io/0.5.1/expo/">
+        
+        Accueil
+      </a>
+
+      <a class="navbar-item " href="{{ path('blog') }}">
+        
+        Blog
+      </a>
+      <a class="navbar-item " href="{{ path('contact') }}">
+        
+        Contactez nous
+      </a>
+    </div>
+
+    <div class="navbar-end">
+
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="tw-button button"
+  data-social-network="Twitter"
+  data-social-action="tweet"
+  data-social-target="https://versions.bulma.io/0.5.1"
+  target="_blank"
+  href="https://twitter.com/intent/tweet?text=Bulma v0.5.1: a modern CSS framework based on Flexbox&hashtags=bulmaio&url=https://versions.bulma.io/0.5.1&via=jgthms">
+  <span class="icon">
+    <i class="fa fa-twitter"></i>
+  </span>
+  <span>
+    Tweet
+  </span>
+</a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Download</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
-        {% block content %}{% endblock %}
+
+        {% block content %} {% endblock %}
+
+      <footer class="footer">
+        <div class="container">
+          <div class="content has-text-centered">
+            <p>
+              <strong>Bulma</strong> by <a href="http://jgthms.com">Soufiane Laaouinate</a>. The source code is licensed
+              <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+              is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+            </p>
+            <p>
+              <a class="icon" href="https://github.com/jgthms/bulma">
+                <i class="fa fa-github"></i>
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <link rel="stylesheet" href="{{ asset('back/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontawesome/CSS/font-awesome.min.css') }}">
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">AppSymfony</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"> <i class="fa fa-home"></i> Accueil <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <li  class="nav-item"><a class="nav-link" href="#"><i class="fa fa-cog fa-spin"></i> Connécte tant que : {{ app.user.username }}</a></li>
+        <li  class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_logout') }}"> <i class="fa fa-sign-out"></i> {{ 'layout.logout' | trans({}, 'FOSUserBundle') }}</a></li>
+        {% else %}
+        <li  class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_login') }}"> <i class="fa fa-sign-in"></i> {{ 'layout.login' | trans({}, 'FOSUserBundle') }}</a></li>
+        <li  class="nav-item"><a class="nav-link" href="{{ path('fos_user_registration_register') }}"> <i class="fa fa-user"></i> {{ 'layout.register' | trans({}, 'FOSUserBundle') }}</a></li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>
+
+
+        <div class="container-fluid">
+
+              <div ="row">
+                    <div class="col-md-6">
+                        {% block breadcrum %} {% endblock %}
+                    </div>
+                    <div class="col-md-12" align="right" id="app">
+                      {% verbatim %}
+                        <select v-on:change="getAccesRapid" name="accesRapide" v-model="accesRapide">
+                          <option v-for="acces in listAccesRapide" v-bind:value="acces.lien">{{ acces.libelle }}</option>      
+                        </select>
+                      {% endverbatim %}
+                    </div>   
+              </div>
+
+              <div class="row">
+                    <div class="col-md-3">
+
+                        <ul class="list-group ">
+                            <li class="list-group-item"><a href="">Tableau de bord</a></li>
+                            <li class="list-group-item">Catégorie</li>
+                            <li class="list-group-item"><a href="{{ path('admin_category_index') }}">Liste des catégories</a></li>
+                            <li class="list-group-item"><a href="{{ path('admin_category_new') }}">Nouvelle catégorie</a></li>
+                            <li class="list-group-item">Article</li>
+                            <li class="list-group-item"><a href="{{ path('admin_post_index') }}">Liste des articles</a></li>
+                            <li class="list-group-item"><a href="{{ path('admin_post_new') }}">Nouveau article</a></li>
+                            <li class="list-group-item">Administration</li>
+                            <li class="list-group-item"><a href="">Statistique</a></li>
+                            <li class="list-group-item"><a href="">paramétrage</a></li>
+                        <ul/>
+
+                    </div>
+
+                    <div class="col-md-9  bg-light">
+                        {{ include('alert.html.twig') }}
+
+                        {% block content %}{% endblock %}
+                    </div>
+
+              </div>
+        </div>
+
+
+        <script src="{{ asset('js/vue.min.js') }}"></script>
+
+        <script>
+            var myApp = new Vue({
+                  el: "#app",
+                  data: {
+                    accesRapide:"",
+                    listAccesRapide:[
+                      {libelle:"Accès rapide" ,lien:""},
+                      {libelle:"Nouveau article" ,lien:"/admin/post/new"},
+                      {libelle:"Nouvelle catégorie" ,lien:"/admin/category/new"},
+                    ]
+                  },
+                  methods:{
+                    getAccesRapid:function(){
+                        window.location = this.accesRapide;
+                    }
+                  }
+            });
+        </script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

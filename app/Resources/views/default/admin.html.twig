@@ -1,16 +1,26 @@
-{% extends 'base.html.twig'%}
+{% extends 'back.html.twig'%}
 
-{% block body %}
+{% block content %}
 
-<h1>page pour Admin</h1>
-<p>{{ dump(app.user) }}</p>
+    <h1>page pour Admin</h1>
+    <p>{{ app.user.id }}</p>
+    <p>{{ app.user.email }}</p>
+    <ul>
+        {% for role in app.user.roles %}
+        <li>{{ role }}</li<
+        {% endfor %}
+    </ul>
 
-<p>{{ app.user.id }}</p>
-<p>{{ app.user.email }}</p>
-<ul>
-    {% for role in app.user.roles %}
-    <li>{{ role }}</li<
-    {% endfor %}
-</ul>
+{% endblock %}
+
+
+{% block breadcrum %}
+
+    <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Liste des catégories</li>
+         </ol>
+    </nav>
 
 {% endblock %}
